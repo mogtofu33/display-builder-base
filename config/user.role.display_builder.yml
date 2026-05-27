@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: display_builder
+label: 'Display Builder'
+weight: 2
+is_admin: false
+permissions: {  }

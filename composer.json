@@ -1,0 +1,33 @@
+{
+    "name": "drupal/display_builder_base",
+    "description": "Provide base start for a Display Builder website.",
+    "keywords": ["recipe", "Drupal recipes", "drupal recipe"],
+    "type": "drupal-recipe",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Jean Valverde",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "drupal/display_builder": "@dev",
+        "drupal/easy_breadcrumb": "^2.0.9",
+        "drupal/link_attributes": "^2.1.2",
+        "drupal/smart_trim": "^2.3.1",
+        "drupal/token": "^1.17",
+        "drupal/pathauto": "^1.15",
+        "drupal/redirect": "^1.9",
+        "drupal/simple_sitemap": "^4",
+        "drupal/sitemap": "^2.0",
+        "drupal/ui_icons": "^1.1.2",
+        "drupal/ui_patterns": "^2.0",
+        "drupal/ui_patterns_settings": "3.0.x-dev",
+        "drupal/ui_skins": "^1.1",
+        "drupal/ui_styles": "^1.19"
+    },
+    "require-dev": {
+        "drupal/sdc_devel": "^1.0.2",
+        "drupal/display_builder_dev_tools": "@dev"
+    }
+}

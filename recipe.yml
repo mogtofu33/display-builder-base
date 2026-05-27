@@ -1,0 +1,168 @@
+name: 'Display Builder Base'
+description: 'Provide base start for a Display Builder website.'
+type: 'Site'
+
+# @see web/core/recipes/standard/recipe.yml
+recipes:
+  # From the standard profile
+  - core/recipes/basic_block_type
+  # Only needed because navigation.module places a shortcuts block.
+  # - core/recipes/basic_shortcuts
+  - core/recipes/article_comment
+  - core/recipes/article_tags
+  - core/recipes/article_content_type
+  - core/recipes/page_content_type
+  - core/recipes/basic_html_format_editor
+  - core/recipes/full_html_format_editor
+  - core/recipes/content_search
+  - core/recipes/core_recommended_performance
+  - core/recipes/core_recommended_maintenance
+  - core/recipes/core_recommended_admin_theme
+  # - core/recipes/core_recommended_front_end_theme
+  - core/recipes/user_picture
+  # Provides a fallback text format which is available to all users.
+  - core/recipes/restricted_html_format
+  - core/recipes/administrator_role
+  - core/recipes/content_editor_role
+
+  # Media recipe from core, not in standard.
+  - core/recipes/audio_media_type
+  - core/recipes/document_media_type
+  - core/recipes/image_media_type
+  - core/recipes/remote_video_media_type
+
+  - core/recipes/standard_responsive_images/
+
+install:
+  # Core modules.
+  - breakpoint
+  - config
+  - contextual
+  - datetime
+  - field_ui
+  - help
+  - history
+  - image
+  - menu_link_content
+  - menu_ui
+  - options
+  - views_ui
+  # - responsive_image
+  - views_ui
+
+  # Do not use navigation as it enable layout builder.
+  - toolbar
+
+  # Added media.
+  # - media
+  # - media_library
+
+  # UI Suite.
+  - ui_patterns
+  - ui_patterns_field_formatters
+  - ui_patterns_library
+  - ui_patterns_views
+  - ui_styles
+  - ui_styles_ckeditor5
+  - ui_styles_ui_patterns
+  - ui_styles_library
+  - ui_skins
+  - ui_icons
+  - ui_icons_field
+  - ui_icons_ckeditor5
+  - ui_icons_menu
+  - ui_icons_library
+  - ui_icons_text
+  - ui_icons_patterns
+  - ui_icons_media
+  - ui_icons_field_link_attributes
+
+  # Display builder.
+  - display_builder
+  - display_builder_entity_view
+  - display_builder_page_layout
+  - display_builder_views
+  - display_builder_ui
+
+  # Contrib modules recommended as minimal start for Display Builder.
+  - easy_breadcrumb
+  - link_attributes
+  - link_attributes_menu_link_content
+  - pathauto
+  - redirect
+  - redirect_404
+  - simple_sitemap
+  - sitemap
+  - smart_trim
+  - token
+
+config:
+  # Any configs that already exist will be skipped.
+  strict: false
+
+  import:
+    # Other config.
+    easy_breadcrumb: '*'
+    image: '*'
+    media_library: '*'
+    media: '*'
+    node:
+      - views.view.content
+    pathauto: '*'
+    redirect: '*'
+    redirect_404: '*'
+    simple_sitemap: '*'
+    sitemap: '*'
+    user:
+      - views.view.user_admin_people
+
+  actions:
+
+    easy_breadcrumb.settings:
+      simpleConfigUpdate:
+        # Remove breadcrumbs when only home appears.
+        # Since we print the page title, this is only the home page.
+        hide_single_home_item: true
+
+    # Exclude 404s from the log.
+    redirect_404.settings:
+      simpleConfigUpdate:
+        suppress_404: true
+
+    # HTML Sitemap.
+    sitemap.settings:
+      simpleConfigUpdate:
+        page_title: Sitemap
+        plugins.frontpage:
+          enabled: true
+          weight: 0
+          settings:
+            title: ''
+            rss: ''
+            front_text_override: ''
+          id: frontpage
+          provider: sitemap
+        plugins.menu:main:
+          enabled: true
+          weight: 0
+          settings:
+            title: ''
+            show_disabled: false
+          id: 'menu:main'
+          provider: sitemap
+        include_css: true
+
+    # Specific Display Builder role.
+    user.role.display_builder:
+      ensure_exists:
+        id: display_builder
+      grantPermissions:
+        - 'use display builder advanced'
+        - 'use display builder default'
+        - 'administer pattern preset'
+        - 'administer display builder profile'
+        - 'view display builder instance'
+        - 'administer page_layout'
+        - 'access ui icons library'
+        - 'access components page'
+        - 'access_ui_styles_library'

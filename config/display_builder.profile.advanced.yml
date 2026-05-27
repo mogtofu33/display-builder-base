@@ -1,0 +1,134 @@
+langcode: en
+status: true
+dependencies: {  }
+id: advanced
+label: Advanced
+description: ''
+islands:
+  library:
+    status: true
+    weight: -10
+    region: sidebar
+  builder:
+    status: true
+    weight: -8
+    region: main
+  preview:
+    status: true
+    weight: -5
+    region: main
+  layers:
+    status: true
+    weight: -7
+    region: main
+  logs:
+    status: false
+    weight: -6
+    region: main
+  tree:
+    status: true
+    weight: -9
+    region: sidebar
+  index_debug:
+    status: false
+    weight: -4
+    region: main
+  state_debug:
+    status: false
+    weight: -3
+    region: main
+  state:
+    status: true
+    weight: -10
+    region: end
+    publish:
+      value: icon
+    restore:
+      value: icon
+    revert:
+      value: icon
+  controls:
+    status: true
+    weight: -9
+    region: end
+    highlight:
+      value: icon
+    fullscreen:
+      value: icon
+    theme:
+      value: icon
+    help:
+      value: hidden
+  history:
+    status: true
+    weight: -8
+    region: end
+    undo:
+      value: icon_label
+    redo:
+      value: icon_label
+    clear:
+      value: icon
+  back:
+    status: true
+    weight: -7
+    region: end
+  collaboration:
+    status: false
+    weight: -6
+    region: end
+  viewport:
+    status: false
+    weight: -5
+    region: end
+  operation:
+    status: false
+    weight: -4
+  reset_button:
+    status: false
+    weight: -3
+  contextual_form:
+    status: true
+    weight: -10
+  styles:
+    status: true
+    weight: -9
+  visibility_conditions:
+    status: false
+    weight: -7
+  component_library:
+    status: true
+    weight: -10
+    exclude:
+      ui_patterns: ui_patterns
+    exclude_id: ''
+    component_status:
+      experimental: experimental
+      deprecated: '0'
+      obsolete: '0'
+    include_no_ui: false
+    show_grouped: true
+    show_variants: true
+    show_mosaic: false
+  block_library:
+    status: true
+    weight: -9
+  preset_library:
+    status: true
+    weight: -8
+  menu:
+    status: true
+    weight: 0
+  menu_delete:
+    status: true
+    weight: 0
+  menu_preset:
+    status: true
+    weight: 0
+  menu_debug:
+    status: false
+    weight: 0
+  tokens:
+    status: false
+    weight: -8
+weight: 0
