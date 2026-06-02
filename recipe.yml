@@ -107,7 +107,12 @@ config:
     media_library: '*'
     media: '*'
     node:
+      # All except the frontpage we replace.
+      - search.page.node_search
+      - views.view.archive
       - views.view.content
+      - views.view.content_recent
+      - views.view.glossary
     pathauto: '*'
     redirect: '*'
     redirect_404: '*'
