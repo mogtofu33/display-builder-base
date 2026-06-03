@@ -1,40 +1,61 @@
-## Display Builder base
+# Display Builder Base
 
-Drupal recipe documentation: https://www.drupal.org/docs/extending-drupal/drupal-recipes
+Drupal recipe documentation:
 
-This recipe is designed to do the following:
+- [https://www.drupal.org/docs/extending-drupal/drupal-recipes](https://www.drupal.org/docs/extending-drupal/drupal-recipes)
+- [https://project.pages.drupalcode.org/distributions_recipes/getting_started.html](https://project.pages.drupalcode.org/distributions_recipes/getting_started.html)
 
-- Install certain parts of Standard install profile that we want
-- Set specific UI Suite and **Display Builder** modules configuration
-- Set specific contributed module configuration
-- Provide a starting point for Drupal ready to develop with** Display Builder**
+This recipe is designed to:
+
+- Install selected components from the Standard install profile
+- Provide a Drupal starting point that is ready for development with **Display Builder**
   and **UI Styles** ecosystem modules.
+- Add contributed modules for a minimum viable site:
+  - easy_breadcrumb
+  - link_attributes
+  - pathauto
+  - redirect
+  - simple_sitemap
+  - sitemap
+  - smart_trim
+  - token
 
-## Installing
+This recipe is intended to set up a complete site from scratch and meet core
+project expectations.
 
-- Start with a Drupal 11 site
-- Install the 'Minimal' profile
+It is intended to be used as a base for a Display Builder theme recipe, such as
+[Display Builder Bootstrap Recipe](https://www.drupal.org/project/display_builder_bootstrap).
+
+For more information, visit [Display Builder](https://www.drupal.org/project/display_builder) and
+[UI Suite](https://www.drupal.org/project/ui_suite).
+
+## Installation
+
+- Start with a Drupal **11.3+** site
+- Install the `Minimal` profile
 - Apply the recipe
 
-The recipe can be applied with PHP in Drupal 11.3+.
+You can apply the recipe using PHP in Drupal **11.3+**.
 
-Execute this command from the web root:
+Run this command from the web root:
 
 ```shell
 php core/scripts/drupal recipe recipes/contrib/display_builder_base
 ```
 
-Or by using `ddev exec`
+Or by using `ddev exec`:
 
 ```shell
 ddev exec -d /var/www/html/web php core/scripts/drupal recipe recipes/contrib/display_builder_base
 ```
 
-If all goes well, you should see the following output:
+If the command succeeds, you should see the following output:
 
 ```shell
 [OK] Display Builder Base applied successfully
 ```
 
-Clear the cache after the recipe is applied. When going back to the site,
-all the recipe configuration and customization has been applied.
+**Clear the cache** after applying the recipe.
+
+When you return to the site, all recipe configuration and customizations should
+be in place.
