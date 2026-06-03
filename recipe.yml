@@ -12,8 +12,9 @@ recipes:
   - core/recipes/article_tags
   - core/recipes/article_content_type
   - core/recipes/page_content_type
-  - core/recipes/basic_html_format_editor
-  - core/recipes/full_html_format_editor
+  # Exclude default editor as we override them in theme recipe.
+  # - core/recipes/basic_html_format_editor
+  # - core/recipes/full_html_format_editor
   - core/recipes/content_search
   - core/recipes/core_recommended_performance
   - core/recipes/core_recommended_maintenance
@@ -34,7 +35,7 @@ recipes:
   - core/recipes/standard_responsive_images/
 
 install:
-  # Core modules.
+  # Core modules close to standard recipe.
   - breakpoint
   - config
   - contextual
@@ -47,15 +48,9 @@ install:
   - menu_ui
   - options
   - views_ui
-  # - responsive_image
-  - views_ui
 
   # Do not use navigation as it enable layout builder.
   - toolbar
-
-  # Added media.
-  # - media
-  # - media_library
 
   # UI Suite.
   - ui_patterns
@@ -97,31 +92,82 @@ install:
   - token
 
 config:
-  # Any configs that already exist will be skipped.
-  strict: false
+  # This recipe is intended to set up a full site from scratch, fulfilling certain
+  # expectations. It's not really designed to be a building block. Therefore, treat
+  # all of the config strictly.
+  strict: true
 
   import:
-    # Other config.
-    easy_breadcrumb: '*'
-    image: '*'
-    media_library: '*'
-    media: '*'
+    # Standard recipe config without Olivero.
+    claro:
+      - block.block.claro_help
+    help:
+      - search.page.help_search
+      - block.block.claro_help_search
+    image:
+      - image.style.large
+      - image.style.thumbnail
     node:
-      # All except the frontpage we replace.
-      - search.page.node_search
       - views.view.archive
       - views.view.content
       - views.view.content_recent
+      - views.view.frontpage
       - views.view.glossary
+    user:
+      - core.entity_view_mode.user.compact
+      - search.page.user_search
+      - views.view.user_admin_people
+      - views.view.who_s_new
+      - views.view.who_s_online
+
+    # Contrib modules config.
+    easy_breadcrumb: '*'
     pathauto: '*'
     redirect: '*'
     redirect_404: '*'
     simple_sitemap: '*'
     sitemap: '*'
-    user:
-      - views.view.user_admin_people
 
   actions:
+    # Default to standard recipe.
+    node.settings:
+      simpleConfigUpdate:
+        use_admin_theme: true
+    system.site:
+      simpleConfigUpdate:
+        page.front: /node
+
+    user.role.anonymous:
+      grantPermission: 'access content'
+    user.role.authenticated:
+      grantPermissions:
+        - 'access content'
+        - 'delete own files'
+    user.role.content_editor:
+      grantPermissions:
+        - 'access content overview'
+        - 'access contextual links'
+        - 'access files overview'
+        - 'access toolbar'
+        - 'administer url aliases'
+        - 'create terms in tags'
+        - 'create url aliases'
+        - 'edit own comments'
+        - 'edit terms in tags'
+        - 'delete own files'
+        - 'revert all revisions'
+        - 'view all revisions'
+        - 'view the administration theme'
+      grantPermissionsForEachNodeType:
+        - 'create %bundle content'
+        - 'delete %bundle revisions'
+        - 'delete own %bundle content'
+        - 'edit own %bundle content'
+    user.settings:
+      simpleConfigUpdate:
+        verify_mail: true
+        register: admin_only
+        cancel_method: user_cancel_block
 
     easy_breadcrumb.settings:
       simpleConfigUpdate:
@@ -134,7 +180,7 @@ config:
       simpleConfigUpdate:
         suppress_404: true
 
-    # HTML Sitemap.
+    # HTML Sitemap with main menu.
     sitemap.settings:
       simpleConfigUpdate:
         page_title: Sitemap
@@ -162,12 +208,14 @@ config:
       ensure_exists:
         id: display_builder
       grantPermissions:
+        - 'access components page'
+        - 'access ui icons library'
+        - 'access_ui_styles_library'
+        - 'administer display builder profile'
+        - 'administer page_layout'
+        - 'administer pattern preset'
         - 'use display builder advanced'
         - 'use display builder default'
-        - 'administer pattern preset'
-        - 'administer display builder profile'
+        - 'use text format basic_html'
+        - 'use text format full_html'
         - 'view display builder instance'
-        - 'administer page_layout'
-        - 'access ui icons library'
-        - 'access components page'
-        - 'access_ui_styles_library'
