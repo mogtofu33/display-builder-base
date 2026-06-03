@@ -8,17 +8,20 @@ recipes:
   - core/recipes/basic_block_type
   # Only needed because navigation.module places a shortcuts block.
   # - core/recipes/basic_shortcuts
-  - core/recipes/article_comment
-  - core/recipes/article_tags
-  - core/recipes/article_content_type
+  # Article do not allow for easy override, so we replicate them in each theme recipe.
+  # - core/recipes/article_comment
+  # - core/recipes/article_tags
+  # - core/recipes/article_content_type
+  - core/recipes/tags_taxonomy
   - core/recipes/page_content_type
-  # Exclude default editor as we override them in theme recipe.
+  # Exclude default editor as we override them in each theme recipe.
   # - core/recipes/basic_html_format_editor
   # - core/recipes/full_html_format_editor
   - core/recipes/content_search
   - core/recipes/core_recommended_performance
   - core/recipes/core_recommended_maintenance
   - core/recipes/core_recommended_admin_theme
+  # Obvusly not needed as we use theme recipe.
   # - core/recipes/core_recommended_front_end_theme
   - core/recipes/user_picture
   # Provides a fallback text format which is available to all users.
@@ -52,7 +55,7 @@ install:
   # Do not use navigation as it enable layout builder.
   - toolbar
 
-  # UI Suite.
+  # UI Suite modules.
   - ui_patterns
   - ui_patterns_field_formatters
   - ui_patterns_library
@@ -120,13 +123,22 @@ config:
       - views.view.who_s_new
       - views.view.who_s_online
 
+    media: '*'
+    media_library: '*'
+    taxonomy: '*'
+    display_builder: '*'
+
     # Contrib modules config.
     easy_breadcrumb: '*'
     pathauto: '*'
-    redirect: '*'
+    redirect:
+      - redirect.settings
+      - system.action.redirect_delete_action
+      - views.view.redirect
     redirect_404: '*'
     simple_sitemap: '*'
-    sitemap: '*'
+    sitemap:
+      - sitemap.settings
 
   actions:
     # Default to standard recipe.
@@ -152,7 +164,6 @@ config:
         - 'administer url aliases'
         - 'create terms in tags'
         - 'create url aliases'
-        - 'edit own comments'
         - 'edit terms in tags'
         - 'delete own files'
         - 'revert all revisions'
