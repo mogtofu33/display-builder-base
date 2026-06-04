@@ -215,7 +215,7 @@ config:
     editor.editor.full_html:
       addItemToToolbar:
         item_name: icon
-        position: 10
+        position: 14
         replace: true
 
     # Contrib modules config.
