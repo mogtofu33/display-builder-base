@@ -14,9 +14,8 @@ recipes:
   # - core/recipes/article_content_type
   - core/recipes/tags_taxonomy
   - core/recipes/page_content_type
-  # Exclude default editor as we override them in each theme recipe.
-  # - core/recipes/basic_html_format_editor
-  # - core/recipes/full_html_format_editor
+  - core/recipes/basic_html_format_editor
+  - core/recipes/full_html_format_editor
   - core/recipes/content_search
   - core/recipes/core_recommended_performance
   - core/recipes/core_recommended_maintenance
@@ -180,6 +179,46 @@ config:
         register: admin_only
         cancel_method: user_cancel_block
 
+    # Add icon to editor
+    filter.format.basic_html:
+      setFilterConfig:
+        instance_id: icon_embed
+        configuration:
+          id: icon_embed
+          provider: ui_icons_text
+          status: true
+          weight: 100
+          settings:
+            allowed_icon_pack: {}
+            result_format: grid
+            max_result: 100
+
+    editor.editor.basic_html:
+      addItemToToolbar:
+        item_name: icon
+        position: 10
+        replace: true
+
+    filter.format.full_html:
+      setFilterConfig:
+        instance_id: icon_embed
+        configuration:
+          id: icon_embed
+          provider: ui_icons_text
+          status: true
+          weight: 100
+          settings:
+            allowed_icon_pack: {}
+            result_format: grid
+            max_result: 100
+
+    editor.editor.full_html:
+      addItemToToolbar:
+        item_name: icon
+        position: 10
+        replace: true
+
+    # Contrib modules config.
     easy_breadcrumb.settings:
       simpleConfigUpdate:
         # Remove breadcrumbs when only home appears.
