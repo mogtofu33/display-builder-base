@@ -34,7 +34,7 @@ recipes:
   - core/recipes/image_media_type
   - core/recipes/remote_video_media_type
 
-  - core/recipes/standard_responsive_images/
+  # - core/recipes/standard_responsive_images/
 
 install:
   # Core modules close to standard recipe.
@@ -148,6 +148,10 @@ config:
       simpleConfigUpdate:
         page.front: /node
 
+    file.settings:
+      simpleConfigUpdate:
+        filename_sanitization.replace_whitespace: true
+
     user.role.anonymous:
       grantPermission: 'access content'
     user.role.authenticated:
@@ -178,6 +182,11 @@ config:
         verify_mail: true
         register: admin_only
         cancel_method: user_cancel_block
+
+    # Disable the `files` view because it is not clear to most users what the
+    # difference is between "Files" and "Media". We favor media.
+    views.view.files:
+      disable: {}
 
     # Add icon to editor
     filter.format.basic_html:
